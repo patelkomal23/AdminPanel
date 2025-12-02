@@ -1,0 +1,65 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <div class="card shadow-sm">
+        <div class="card-header text-center fw-bold fs-2">
+          User Profile
+        </div>
+
+        <div class="card-body px-4">
+
+          <div class="text-center mb-4">
+            <img
+              src="<%= user.image || '/uploads/download.png' %>"
+              class="rounded-circle"
+              width="120"
+              height="120"
+            >
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">Username</div>
+            <div class="col-8"><%= user.username %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">Email</div>
+            <div class="col-8"><%= user.email %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">Phone</div>
+            <div class="col-8"><%= user.Mobile || 'N/A' %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">Gender</div>
+            <div class="col-8"><%= user.gender || 'N/A' %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">DOB</div>
+            <div class="col-8"><%= user.DOB || 'N/A' %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-4 fw-semibold text-muted">Bio</div>
+            <div class="col-8"><%= user.Bio || 'N/A' %></div>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+            <a href="/logout" class="btn btn-danger ms-2">Logout</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
