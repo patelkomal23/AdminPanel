@@ -100,18 +100,15 @@ const adminctl = {
             user: res.locals.user
         });
     },
-    profile(req, res) {
-        res.render("pages/profilepage", {
-            user: res.locals.user
-        });
-    },
+
 
     /* ================= EDIT PROFILE PAGE ================= */
     editprofilepage(req, res) {
         res.render("pages/editprofilepage", {
             user: res.locals.user
         });
-    },
+    }
+    ,
 
     /* ================= UPDATE PROFILE ================= */
     async editprofile(req, res) {
@@ -139,6 +136,7 @@ const adminctl = {
             res.redirect("/edit-profile");
         }
     },
+
 
     forgotpasswordpage(req, res) {
         return res.render('./pages/forgotpassword.ejs')

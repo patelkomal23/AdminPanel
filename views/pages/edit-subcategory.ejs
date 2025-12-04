@@ -1,0 +1,86 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="page-wrapper">
+  <!-- Breadcrumb -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center">
+        <h4 class="page-title">Edit SubCategory</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Edit Category</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow">
+
+          <!-- ✅ FORM -->
+          <form 
+            class="form-horizontal"
+            method="POST"
+            action="/subcategory/edit-category/<%= data.id %>"
+            enctype="multipart/form-data">
+
+            <div class="card-body">
+              <!-- <h4 class="card-title mb-4">Category Edit</h4> -->
+
+              <!-- Category Name -->
+              <div class="mb-3">
+                <label class="form-label">Category Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  value="<%= data.name %>"
+                  required
+                />
+              </div>
+
+              <!-- Existing Image -->
+              <div class="mb-3">
+                <label class="form-label d-block">Current Image</label>
+                <img 
+                  src="<%= data.image %>" 
+                  alt="Category Image"
+                  width="80"
+                  class="img-thumbnail"
+                />
+              </div>
+
+              <!-- Upload New Image -->
+              <div class="mb-3">
+                <label class="form-label">Upload New Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  name="image"
+                />
+              </div>
+            </div>
+
+            <div class="card-footer text-end">
+              <button type="submit" class="btn btn-primary">
+                Update SubCategory
+              </button>
+            </div>
+
+          </form>
+          <!-- ✅ FORM END -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

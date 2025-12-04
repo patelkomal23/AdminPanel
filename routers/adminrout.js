@@ -22,6 +22,5 @@ adminrouter.get('/change-password',adminctl.changepasswordpage);
 adminrouter.post('/change-password',adminctl.changepassword);
 adminrouter.get('/profile',adminctl.profile);
 adminrouter.get('/edit-profile',adminctl.editprofilepage);
-adminrouter.post('/edit-profile', upload, adminctl.editprofile);
-
+adminrouter.post('/edit-profile',upload,adminctl.editprofile);
 export default adminrouter;
