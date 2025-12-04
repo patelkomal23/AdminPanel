@@ -1,0 +1,102 @@
+<%- include('../partials/header.ejs') %>
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+<div class="page-wrapper">
+
+  <!-- Breadcrumb -->
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Tables</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                View ExtraCategory
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container -->
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-0">ExtraCategory List</h5>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">ExtraCategory Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">SubCategory</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% extracategorys.forEach((val, inx) => { %>
+                <tr>
+                  <td><%= inx + 1 %></td>
+
+                  <td>
+                    <img src="<%= val.image %>"
+                         width="70"
+                         alt="<%= val.name %>">
+                  </td>
+
+                  <td><%= val.name %></td>
+
+                  <!-- Category Name -->
+                  <td>
+                    <%= val.subCategory && val.subCategory.category
+                          ? val.subCategory.category.name
+                          : "N/A" %>
+                  </td>
+
+                  <!-- SubCategory Name -->
+                  <td>
+                    <%= val.subCategory
+                          ? val.subCategory.name
+                          : "N/A" %>
+                  </td>
+
+                  <td>
+                    <a href="/extracategory/edit-extracategory/<%= val.id %>"
+                       class="btn btn-outline-success">
+                      <i class="bi bi-pen-fill"></i>
+                    </a>
+
+                    <a href="/extracategory/delete-extracategory/<%= val.id %>"
+                       class="btn btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

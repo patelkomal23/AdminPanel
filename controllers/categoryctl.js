@@ -1,6 +1,7 @@
 import { log } from "console";
 import Category from "../models/categorymodel.js";
 import fs from "fs"
+import SubCategory from "../models/subcategorymodel.js";
 
 const categoryctl = {
     addcategorypage(req, res) {
@@ -8,13 +9,28 @@ const categoryctl = {
     },
     async viewcategorypage(req, res) {
         try {
-            let categorys = await Category.find({});
-            return res.render('./pages/view-category.ejs', {
-                categorys
+            const categorys = await Category.find();
+
+            // ✅ Check subcategory count per category
+            const categoriesWithCount = await Promise.all(
+                categorys.map(async (cat) => {
+                    const subCount = await SubCategory.countDocuments({
+                        category: cat._id
+                    });
+
+                    return {
+                        ...cat.toObject(),
+                        subCount
+                    };
+                })
+            );
+
+            return res.render("./pages/view-category.ejs", {
+                categorys: categoriesWithCount
             });
         } catch (error) {
             console.log(error);
-            return res.render('./pages/view-category.ejs', {
+            return res.render("./pages/view-category.ejs", {
                 categorys: []
             });
         }
@@ -74,7 +90,7 @@ const categoryctl = {
             return res.redirect(req.get("Referer") || '/')
         }
     },
-    
+
 }
 
 export default categoryctl;

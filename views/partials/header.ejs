@@ -27,7 +27,25 @@
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      
     <![endif]-->
+  <style>
+    /* Fix sidebar image gap */
+    .sidebar-nav .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Sidebar image icon */
+    .sidebar-nav .sidebar-link img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 
 <body>
@@ -252,7 +270,8 @@
                     waves-effect waves-dark
                     pro-pic
                   " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/assets/images/users/user.jpg" alt="user" class="rounded-circle" width="31" />
+                <img src="<%= user.image || '/assets/images/users/user.jpg' %> " alt="user" class="rounded-circle"
+                  width="31" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/profile"><i class="mdi mdi-account me-1 ms-1"></i>
@@ -291,44 +310,84 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
           <ul id="sidebarnav" class="pt-4">
+
+            <!-- Dashboard -->
             <li class="sidebar-item">
-              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false"><i
-                  class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+              <a class="sidebar-link" href="/">
+                <i class="mdi mdi-view-dashboard"></i>
+                <span class="hide-menu">Dashboard</span>
+              </a>
             </li>
+
+            <!-- Category -->
             <li class="sidebar-item">
-              <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Category </span></a>
-              <ul aria-expanded="false" class="collapse first-level">
+              <a class="sidebar-link has-arrow" href="javascript:void(0)">
+                <i class="bi bi-grid"></i>
+                <span class="hide-menu">Category</span>
+              </a>
+              <ul class="collapse first-level">
                 <li class="sidebar-item">
-                  <a href="/add-category" class="sidebar-link"> <i class="bi bi-plus-circle"></i>
-                    <span class="hide-menu">Add Category</span></a>
+                  <a href="/add-category" class="sidebar-link">
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="hide-menu">Add Category</span>
+                  </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/view-category"
-                    aria-expanded="false"> <i class="bi bi-list-ul"></i>
-                    <span class="hide-menu">View
-                      Category</span></a>
+                  <a href="/view-category" class="sidebar-link">
+                    <i class="bi bi-list-ul"></i>
+                    <span class="hide-menu">View Category</span>
+                  </a>
                 </li>
               </ul>
             </li>
-             <li class="sidebar-item">
-              <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">subCategory </span></a>
-              <ul aria-expanded="false" class="collapse first-level">
+
+            <!-- SubCategory -->
+            <li class="sidebar-item">
+              <a class="sidebar-link has-arrow" href="javascript:void(0)">
+                <i class="bi bi-diagram-3"></i>
+                <span class="hide-menu">SubCategory</span>
+              </a>
+              <ul class="collapse first-level">
                 <li class="sidebar-item">
-                  <a href="/add-subcategory" class="sidebar-link"> <i class="bi bi-plus-circle"></i>
-                    <span class="hide-menu">Add subCategory</span></a>
+                  <a href="/add-subcategory" class="sidebar-link">
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="hide-menu">Add SubCategory</span>
+                  </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/view-subcategory"
-                    aria-expanded="false"> <i class="bi bi-list-ul"></i>
-                    <span class="hide-menu">View
-                      subCategory</span></a>
+                  <a href="/view-subcategory" class="sidebar-link">
+                    <i class="bi bi-list-ul"></i>
+                    <span class="hide-menu">View SubCategory</span>
+                  </a>
                 </li>
               </ul>
             </li>
+
+            <!-- ExtraCategory -->
+            <li class="sidebar-item">
+              <a class="sidebar-link has-arrow" href="javascript:void(0)">
+                <i class="bi bi-layers"></i>
+                <span class="hide-menu">ExtraCategory</span>
+              </a>
+              <ul class="collapse first-level">
+                <li class="sidebar-item">
+                  <a href="/add-extracategory" class="sidebar-link">
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="hide-menu">Add ExtraCategory</span>
+                  </a>
+                </li>
+                <li class="sidebar-item">
+                  <a href="/view-extracategory" class="sidebar-link">
+                    <i class="bi bi-list-ul"></i>
+                    <span class="hide-menu">View ExtraCategory</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
           </ul>
         </nav>
+
         <!-- End Sidebar navigation -->
       </div>
       <!-- End Sidebar scroll-->

@@ -2,41 +2,31 @@
 
 <div class="page-wrapper">
 
-  <!-- ================= Breadcrumb ================= -->
+  <!-- Breadcrumb -->
   <div class="page-breadcrumb">
     <div class="row">
       <div class="col-12 d-flex align-items-center">
-        <h4 class="page-title">Edit SubCategory</h4>
-        <div class="ms-auto text-end">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="/view-subcategory">SubCategory</a></li>
-              <li class="breadcrumb-item active">Edit</li>
-            </ol>
-          </nav>
-        </div>
+        <h4 class="page-title">Edit ExtraCategory</h4>
       </div>
     </div>
   </div>
 
-  <!-- ================= Content ================= -->
+  <!-- Content -->
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-6">
 
         <div class="card shadow">
 
-          <!-- ✅ FORM START -->
           <form method="POST"
-                action="/subcategory/edit-subcategory/<%= data.id %>"
+                action="/extracategory/edit-extracategory/<%= data._id %>"
                 enctype="multipart/form-data">
 
             <div class="card-body">
 
-              <!-- SubCategory Name -->
+              <!-- ExtraCategory Name -->
               <div class="mb-3">
-                <label class="form-label">SubCategory Name</label>
+                <label class="form-label">ExtraCategory Name</label>
                 <input type="text"
                        name="name"
                        value="<%= data.name %>"
@@ -44,14 +34,14 @@
                        required>
               </div>
 
-              <!-- ✅ Category Dropdown -->
+              <!-- SubCategory -->
               <div class="mb-3">
-                <label class="form-label">Select Category</label>
-                <select name="category" class="form-select" required>
-                  <% categories.forEach(cat => { %>
-                    <option value="<%= cat._id %>"
-                      <%= String(cat._id) === String(data.category) ? 'selected' : '' %>>
-                      <%= cat.name %>
+                <label class="form-label">Select SubCategory</label>
+                <select name="subCategory" class="form-select" required>
+                  <% subCategories.forEach(sc => { %>
+                    <option value="<%= sc._id %>"
+                      <%= String(sc._id) === String(data.subCategory) ? 'selected' : '' %>>
+                      <%= sc.name %>
                     </option>
                   <% }) %>
                 </select>
@@ -61,12 +51,11 @@
               <div class="mb-3">
                 <label class="form-label d-block">Current Image</label>
                 <img src="<%= data.image %>"
-                     alt="SubCategory"
                      width="90"
                      class="img-thumbnail">
               </div>
 
-              <!-- Upload New Image -->
+              <!-- New Image -->
               <div class="mb-3">
                 <label class="form-label">Upload New Image</label>
                 <input type="file"
@@ -76,20 +65,17 @@
 
             </div>
 
-            <!-- Footer -->
             <div class="card-footer text-end">
-              <a href="/view-subcategory" class="btn btn-secondary">
-                Back
-              </a>
+              <a href="/view-extracategory" class="btn btn-secondary">Back</a>
               <button type="submit" class="btn btn-primary">
-                Update SubCategory
+                Update ExtraCategory
               </button>
             </div>
 
           </form>
-          <!-- ✅ FORM END -->
 
         </div>
+
       </div>
     </div>
   </div>
