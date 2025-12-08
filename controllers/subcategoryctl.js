@@ -1,7 +1,7 @@
-import subCategory from "../models/subcategorymodel.js";
 import ExtraCategory from "../models/extracategorymodel.js";
 import Category from "../models/categorymodel.js";
 import fs from "fs";
+import subCategory from "../models/subcategorymodel.js";
 
 const subcategoryctl = {
 
@@ -23,26 +23,13 @@ const subcategoryctl = {
   // ===============================
   async viewsubcategorypage(req, res) {
     try {
-      const subs = await subCategory
-        .find()
-        .populate("category", "name");
-
-      // ✅ count extracategory per subcategory
-      const subcategorys = await Promise.all(
-        subs.map(async (sub) => {
-          const extraCount = await ExtraCategory.countDocuments({
-            subCategory: sub._id
-          });
-
-          return {
-            ...sub.toObject(),
-            extraCount
-          };
-        })
-      );
-
-      res.render("pages/view-subcategory", { subcategorys });
-    } catch (error) {
+      let subcategorys = await subCategory.find({}).populate('category');
+      let extracategorys = await ExtraCategory.find({});
+      return res.render('./pages/view-subcategory.ejs', {
+        subcategorys, extracategorys
+      })
+    }
+    catch (error) {
       console.log(error.message);
       res.render("pages/view-subcategory", { subcategorys: [] });
     }
@@ -51,20 +38,16 @@ const subcategoryctl = {
   // ===============================
   // ADD SUBCATEGORY
   // ===============================
-  async addsubcategory(req, res) {
-    try {
-      await subCategory.create({
-        name: req.body.name,
-        category: req.body.category,
-        image: `/uploads/${req.file.filename}`
-      });
-
-      res.redirect("/view-subcategory");
-    } catch (error) {
-      console.log(error.message);
-      res.redirect(req.get("Referer") || "/");
-    }
-  },
+     async addsubcategory(req,res){
+        try {
+            req.body.image=req.file.path;
+            await subCategory.create(req.body);
+            return res.redirect('/view-subcategory');
+        } catch (error) {
+            console.log(error);
+            return res.redirect('/add-subcategory');
+        }
+    },
 
   // ===============================
   // DELETE SUBCATEGORY (SAFE)
@@ -115,29 +98,20 @@ const subcategoryctl = {
   // ===============================
   async editsubCategory(req, res) {
     try {
-      const { id } = req.params;
-      const oldData = await subCategory.findById(id);
-
-      if (req.file) {
-        req.body.image = `/uploads/${req.file.filename}`;
-      }
-
-      await subCategory.findByIdAndUpdate(id, {
-        name: req.body.name,
-        category: req.body.category,
-        ...(req.body.image && { image: req.body.image })
-      });
-
-      if (req.file && oldData?.image && fs.existsSync(oldData.image)) {
-        fs.unlinkSync(oldData.image);
-      }
-
-      res.redirect("/view-subcategory");
-    } catch (error) {
-      console.log(error.message);
-      res.redirect(req.get("Referer") || "/");
+            const {id}=req.params;
+            if(req.file){
+                req.body.image=req.file.path;
+            }
+            let data=await subCategory.findByIdAndUpdate(id,req.body);
+            if(req.file){
+                fs.unlinkSync(data.image);
+            }
+            return res.redirect('/view-subcategory');
+        } catch (error) {
+            console.log(error);
+            return res.redirect(req.get('Referrer') || "/");
+        }
     }
-  }
 };
 
 export default subcategoryctl;

@@ -15,73 +15,51 @@
       <div class="col-md-6">
 
         <div class="card shadow-sm">
-          <form method="POST"
-                action="/add-extracategory"
-                enctype="multipart/form-data">
+          <form method="POST" action="/add-extracategory" enctype="multipart/form-data">
 
             <div class="card-body">
 
               <!-- ExtraCategory Name -->
               <div class="mb-3">
                 <label class="form-label">ExtraCategory Name</label>
-                <input type="text"
-                       name="name"
-                       class="form-control"
-                       required>
+                <input type="text" name="name" class="form-control" required>
               </div>
 
-              <!-- ✅ Category Dropdown -->
+              <!-- Category Dropdown -->
               <div class="mb-3">
                 <label class="form-label">Select Category</label>
-                <select id="category"
-                        class="form-select"
-                        required>
-                  <option value="">-- Select Category --</option>
-
-                  <% categories.forEach(cat => { %>
-                    <option value="<%= cat._id %>">
-                      <%= cat.name %>
-                    </option>
+                <select class="form-select" name="category" id="category">
+                  <option value="">--- Select Category ---</option>
+                  <% categorys.forEach((val)=>{ %>
+                    <option value="<%= val._id %>"><%= val.name %></option>
                   <% }) %>
                 </select>
               </div>
 
-              <!-- ✅ SubCategory Dropdown -->
+              <!-- SubCategory Dropdown -->
               <div class="mb-3">
                 <label class="form-label">Select SubCategory</label>
-                <select name="subCategory"
-                        id="subCategory"
-                        class="form-select"
-                        required>
-                  <option value="">-- Select SubCategory --</option>
-
-                  <% subCategories.forEach(sc => { %>
-                    <option value="<%= sc._id %>"
-                            data-category="<%= sc.category %>">
-                      <%= sc.name %>
+                <select class="form-select" name="subcategory" id="subCategory">
+                  <option value="">--- Select SubCategory ---</option>
+                  <% subCategorys.forEach((val)=>{ %>
+                    <option value="<%= val._id %>" data-category="<%= val.category %>">
+                      <%= val.name %>
                     </option>
                   <% }) %>
                 </select>
               </div>
 
-              <!-- ✅ Image -->
+              <!-- Image -->
               <div class="mb-3">
                 <label class="form-label">ExtraCategory Image</label>
-                <input type="file"
-                       name="image"
-                       class="form-control"
-                       required>
+                <input type="file" name="image" class="form-control" required>
               </div>
 
             </div>
 
             <div class="card-footer text-end">
-              <a href="/view-extracategory" class="btn btn-secondary">
-                Back
-              </a>
-              <button class="btn btn-primary">
-                Save
-              </button>
+              <a href="/view-extracategory" class="btn btn-secondary">Back</a>
+              <button class="btn btn-primary">Save</button>
             </div>
 
           </form>
@@ -92,7 +70,7 @@
   </div>
 </div>
 
-<!-- ✅ DEPENDENT DROPDOWN SCRIPT -->
+<!-- Dependent Dropdown Script -->
 <script>
   const categorySelect = document.getElementById("category");
   const subCategorySelect = document.getElementById("subCategory");
@@ -100,7 +78,7 @@
   categorySelect.addEventListener("change", function () {
     const categoryId = this.value;
 
-    Array.from(subCategorySelect.options).forEach(option => {
+    [...subCategorySelect.options].forEach(option => {
       if (!option.value) return;
 
       option.style.display =

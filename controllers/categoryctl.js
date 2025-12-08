@@ -9,24 +9,10 @@ const categoryctl = {
     },
     async viewcategorypage(req, res) {
         try {
-            const categorys = await Category.find();
-
-            // ✅ Check subcategory count per category
-            const categoriesWithCount = await Promise.all(
-                categorys.map(async (cat) => {
-                    const subCount = await SubCategory.countDocuments({
-                        category: cat._id
-                    });
-
-                    return {
-                        ...cat.toObject(),
-                        subCount
-                    };
-                })
-            );
-
+            const categorys = await Category.find({});
+            let Subcategorys= await SubCategory.find({});
             return res.render("./pages/view-category.ejs", {
-                categorys: categoriesWithCount
+                categorys ,Subcategorys
             });
         } catch (error) {
             console.log(error);

@@ -1,0 +1,168 @@
+
+      <%- include('../partials/header.ejs') %>
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+          <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+              <h4 class="page-title">Form Basic</h4>
+              <div class="ms-auto text-end">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Add Products
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+          <!-- ============================================================== -->
+          <!-- Start Page Content -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                  <div class="card-body">
+                    <h4 class="card-title">Product Info</h4>
+                    <div class="form-group row">
+                      <label
+                        for="fname"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Product</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Product Name"
+                          name="name"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="fname"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Image</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="file"
+                          class="form-control"
+                          id="image"
+                          placeholder="First Name Here"
+                          name="image"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="fname"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Price</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="price"
+                          placeholder="Price Here"
+                          name="price"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="category"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Category</label
+                      >
+                      <div class="col-sm-9">
+                        <select class="form-select" name="category" id="catrgory">
+                          <option value="">--- Select-Category ---</option>
+                          <% categorys.forEach((val)=>{ %>
+                            <option value="<%= val._id %>"><%= val.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="category"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >SubCategory</label
+                      >
+                      <div class="col-sm-9">
+                        <select class="form-select" name="subcategory" id="subcatrgory">
+                          <option value="">--- Select-Category ---</option>
+                          <% subcategorys.forEach((val)=>{ %>
+                            <option value="<%= val._id %>"><%= val.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="extracategory"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >ExtraCategory</label
+                      >
+                      <div class="col-sm-9">
+                        <select class="form-select" name="extracategory" id="extracatrgory">
+                          <option value="">--- Select-extraCategory ---</option>
+                          <% extracategorys.forEach((val)=>{ %>
+                            <option value="<%= val._id %>"><%= val.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-top">
+                    <div class="card-body">
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End PAge Content -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- Right sidebar -->
+          <!-- ============================================================== -->
+          <!-- .right-sidebar -->
+          <!-- ============================================================== -->
+          <!-- End Right sidebar -->
+          <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <%- include('../partials/footer.ejs') %>

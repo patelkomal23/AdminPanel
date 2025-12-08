@@ -1,35 +1,28 @@
 import mongoose from "mongoose";
 
-const extraCategorySchema = new mongoose.Schema(
-  {
+const extraCategorySchema = new mongoose.Schema({
     name: {
-      type: String,
-      required: true,
-      trim: true
+        type: String,
+        required: true
     },
-
     image: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
-
-    subCategory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SubCategoryTbl",
-      required: true
+    category: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'CategoryTbl',
+        required: true
     },
-
-    status: {
-      type: Boolean,
-      default: true
+    subcategory: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'SubCategoryTbl',   // ✅ FIXED (Case Sensitive)
+        required: true
     }
-  },
-  { timestamps: true }
-);
+}, {
+    timestamps: true
+});
 
-const ExtraCategory = mongoose.model(
-  "ExtraCategoryTbl",
-  extraCategorySchema
-);
+const extraCategory = mongoose.model("extraCategoryTbl", extraCategorySchema);
 
-export default ExtraCategory;
+export default extraCategory;

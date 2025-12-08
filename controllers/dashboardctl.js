@@ -1,6 +1,6 @@
 import User from "../models/usermodel.js";
 import Product from "../models/productmodel.js";
-import Category from "../models/categorymodel.js";
+import Category from "../modelas/categorymodel.js";
 import SubCategory from "../models/subcategorymodel.js";
 import ExtraCategory from "../models/extracategorymodel.js";
 

@@ -1,0 +1,190 @@
+<%- include('../partials/header.ejs') %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <style>
+    .product-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ffffff;
+      border: none !important;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease-in-out;
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: 0.3s ease-in-out;
+    }
+
+    .product-card:hover .product-img {
+      scale: 1.03;
+    }
+
+    .product-body {
+      padding: 18px 22px;
+    }
+
+    .product-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 18px;
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    .product-meta {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+
+    .product-btn {
+      padding: 8px 18px;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-edit {
+      background: #d4f8df;
+      color: #27ae60;
+    }
+
+    .btn-edit:hover {
+      background: #27ae60;
+      color: white;
+    }
+
+    .btn-delete {
+      background: #ffe6e6;
+      color: #e74c3c;
+    }
+
+    .btn-delete:hover {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .icon-md {
+      font-size: 18px;
+    }
+
+    .btn-view {
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    .btn-view:hover {
+      background: #1a73e8;
+      color: white;
+    }
+  </style>
+
+
+  <div class="page-wrapper">
+
+    <!-- Breadcrumb -->
+    <div class="page-breadcrumb">
+      <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+          <h4 class="page-title">View Products</h4>
+          <div class="ms-auto text-end">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Product List</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Cards -->
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <% product.forEach((pro)=> { %>
+
+          <div class="col-md-4 col-lg-3 mb-4">
+            <div class="product-card">
+
+              <a href="/product/<%= pro._id %>">
+                <img src="/<%= pro.image %>" class="product-img">
+              </a>
+
+              <div class="product-body">
+                <h5 class="product-title">
+                  <%= pro.name %>
+                </h5>
+
+                <p class="product-price">₹ <%= pro.price %>
+                </p>
+
+                <p class="product-meta">
+                  <strong>Category:</strong>
+                  <%= pro.category?.name %><br>
+                    <strong>Sub:</strong>
+                    <%= pro.subcategory?.name %><br>
+                      <strong>Extra:</strong>
+                      <%= pro.extracategory?.name %>
+                </p>
+              </div>
+
+              <div class="product-actions">
+
+                <!-- Read More Button -->
+                <a href="/product/<%= pro._id %>" class="product-btn btn-view">
+                  <i class="bi bi-eye-fill icon-md"></i> Read More
+                </a>
+
+                <!-- Edit Button -->
+                <a href="/edit-product/<%= pro._id %>" class="product-btn btn-edit">
+                  <i class="bi bi-pen-fill icon-md"></i> 
+                </a>
+
+                <!-- Delete Button -->
+                <a href="/delete-product/<%= pro._id %>" class="product-btn btn-delete">
+                  <i class="bi bi-trash icon-md"></i> 
+                </a>
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <% }) %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
