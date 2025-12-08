@@ -53,41 +53,37 @@
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <% subcategorys.forEach((val,inx)=>{ %>
-                  <tr>
-                    <td>
-                      <%= inx + 1 %>
-                    </td>
+            <tbody>
+  <% subcategorys.forEach((value, index) => { 
+      const { id, name, image, category } = value;
+  %>
 
-                    <td>
-                      <img src="<%= val.image %>" width="70px" alt="<%= val.name %>">
-                    </td>
+    <tr>
+      <td><%= index + 1 %></td>
 
-                    <td>
-                      <%= val.name %>
-                    </td>
+      <td>
+        <img src="<%= image %>" width="70px" alt="<%= name %>">
+      </td>
 
-                    <!-- ✅ Category Name -->
-                    <td>
-                      <%= val.category ? val.category.name : 'N/A' %>
-                    </td>
+      <td><%= name %></td>
 
-                    <td>
-                      <a href="/subcategory/edit-subcategory/<%= val._id %>" class="btn btn-outline-success">
-                        <i class="bi bi-pen-fill"></i>
-                      </a>
+      <!-- Category Name -->
+      <td><%= category?.name %></td>
 
-                      <% if (val.extraCount===0) { %>
-                        <a href="/subcategory/delete-subcategory/<%= val._id %>" class="btn btn-outline-danger">
-                          <i class="bi bi-trash"></i>
-                        </a>
-                        <% } %>
-                    </td>
+      <td>
+        <a href="/subcategory/edit-subcategory/<%= id %>" class="btn btn-outline-success">
+          <i class="bi bi-pen-fill"></i>
+        </a>
 
-                  </tr>
-                  <% }) %>
-              </tbody>
+        <a href="/subcategory/delete-subcategory/<%= id %>" class="btn btn-outline-danger">
+          <i class="bi bi-trash"></i>
+        </a>
+      </td>
+    </tr>
+
+  <% }) %>
+</tbody>
+
 
             </table>
           </div>

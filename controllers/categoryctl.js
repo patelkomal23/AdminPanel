@@ -10,10 +10,23 @@ const categoryctl = {
     async viewcategorypage(req, res) {
         try {
             const categorys = await Category.find({});
-            let Subcategorys= await SubCategory.find({});
+            const Subcategorys = await SubCategory.find({});
+
+            // Add subCount to each category
+            const categoriesWithCount = await Promise.all(
+                categorys.map(async (cat) => {
+                    const count = await SubCategory.countDocuments({ category: cat._id });
+                    return {
+                        ...cat.toObject(),
+                        subCount: count
+                    };
+                })
+            );
+
             return res.render("./pages/view-category.ejs", {
-                categorys ,Subcategorys
+                categorys: categoriesWithCount
             });
+
         } catch (error) {
             console.log(error);
             return res.render("./pages/view-category.ejs", {
@@ -21,6 +34,7 @@ const categoryctl = {
             });
         }
     },
+
     async addcategory(req, res) {
         try {
             req.body.image = req.file.path;

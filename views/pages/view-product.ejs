@@ -129,48 +129,51 @@
 
       <div class="row">
 
-        <% product.forEach((pro)=> { %>
+        <% product.forEach((value)=> {
+          const {id,name,image,price,category,subcategory,extracategory} = value;
+          %>
+
 
           <div class="col-md-4 col-lg-3 mb-4">
             <div class="product-card">
 
-              <a href="/product/<%= pro._id %>">
-                <img src="/<%= pro.image %>" class="product-img">
+              <a href="/product/<%= id %>">
+                <img src="/<%=image %>" class="product-img">
               </a>
 
               <div class="product-body">
                 <h5 class="product-title">
-                  <%= pro.name %>
+                  <%= name %>
                 </h5>
 
-                <p class="product-price">₹ <%= pro.price %>
+                <p class="product-price">₹ <%= price %>
                 </p>
 
                 <p class="product-meta">
                   <strong>Category:</strong>
-                  <%= pro.category?.name %><br>
+                  <%= category.name %><br>
                     <strong>Sub:</strong>
-                    <%= pro.subcategory?.name %><br>
+                    <%=subcategory.name %><br>
                       <strong>Extra:</strong>
-                      <%= pro.extracategory?.name %>
+                      <%=extracategory.name %>
                 </p>
               </div>
 
               <div class="product-actions">
 
                 <!-- Read More Button -->
-                <a href="/product/<%= pro._id %>" class="product-btn btn-view">
+                <a href="/product/<%=id %>" class="product-btn btn-view">
                   <i class="bi bi-eye-fill icon-md"></i> Read More
                 </a>
 
                 <!-- Edit Button -->
-                <a href="/edit-product/<%= pro._id %>" class="product-btn btn-edit">
-                  <i class="bi bi-pen-fill icon-md"></i> 
+                <a href="/edit-product/<%=id %>" class="product-btn btn-edit">
+                  <i class="bi bi-pen-fill icon-md"></i>
                 </a>
 
                 <!-- Delete Button -->
-                <a href="/delete-product/<%= pro._id %>" class="product-btn btn-delete">
-                  <i class="bi bi-trash icon-md"></i> 
+                <a href="/delete-product/<%=id %>" class="product-btn btn-delete">
+                  <i class="bi bi-trash icon-md"></i>
                 </a>
 
               </div>
